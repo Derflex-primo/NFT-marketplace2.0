@@ -14,8 +14,8 @@ type Props = {
 }
 
 const NavbarLogo: FC<Props> = ({ variant, className }) => {
-  const logo = NAVBAR_LOGO || '/reservoir.svg'
-  const desktopLogo = DESKTOP_NAVBAR_LOGO || '/reservoir-desktop.svg'
+  const logo = NAVBAR_LOGO || '/dflex-desktop.svg'
+  const desktopLogo = DESKTOP_NAVBAR_LOGO ||  '/dflex-desktop.svg'
   const chain = useEnvChain()
   let logoAlt = 'Logo'
 
@@ -47,6 +47,7 @@ const NavbarLogo: FC<Props> = ({ variant, className }) => {
             !variant ? 'hidden md:block' : ''
           } ${mobileVariant ? 'hidden' : ''} ${desktopVariant ? 'block' : ''}`}
         />
+        <h1 className='font-bold text-2xl md-hidden'>DFLex</h1>
         {chain?.testnet && (
           <div
             className={`reservoir-tiny inline rounded-[4px] bg-[#EFC45C] p-1 py-[2px]
@@ -57,7 +58,6 @@ const NavbarLogo: FC<Props> = ({ variant, className }) => {
           }
           `}
           >
-            Testnet
           </div>
         )}
       </a>

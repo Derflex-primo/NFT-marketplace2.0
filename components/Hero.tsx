@@ -140,10 +140,10 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
   let descriptionHeight = '60px'
 
   if (descriptionRef.current) {
-    isLongDescription = descriptionRef.current.clientHeight > 60
+    isLongDescription = descriptionRef.current.clientHeight > 20
     descriptionHeight = descriptionExpanded
       ? `${descriptionRef.current.clientHeight}px`
-      : '60px'
+      : '20px'
   }
 
   const refreshCollection = async function (collectionId: string | undefined) {
@@ -193,31 +193,30 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
   return (
     <>
       <HeroBackground banner={header.banner}>
-        <div className="z-10 flex w-full flex-col items-center gap-6">
+        <div className="z-10 flex w-full flex-col gap-4">
           <img
-            className={`h-20 w-20 rounded-full ${
+            className={`h-[260px] w-[280px] rounded-lg border-4 border-white ${
               header.image ? 'visible' : 'hidden'
             }`}
             alt={`${header.name} Logo`}
             src={header.image}
           />
-          <h1 className="reservoir-h4 text-center text-black dark:text-white">
+          <div className='flex justify-between'> 
+          <h1 className="flex reservoir-h4  text-black dark:text-white">
             {header.name}
+            <img className="ml-2" src="/verified.svg" alt="" />
           </h1>
-          <HeroSocialLinks
-            collection={collection}
-            refreshCollection={refreshCollection}
-          />
+          </div>
           <HeroStats stats={statsObj} />
           {header.description && (
             <>
               <div
-                className="relative overflow-hidden transition-[max-height] ease-in-out md:w-[423px]"
+                className="relative overflow-hidden transition-[max-height] ease-in-out md:w-[700px]"
                 style={{ maxHeight: descriptionHeight }}
               >
                 <p
                   ref={descriptionRef}
-                  className="text-center text-sm text-[#262626] transition-[width] duration-300 ease-in-out dark:text-white"
+                  className="text-sm text-[#262626] transition-[width] duration-300 ease-in-out dark:text-white"
                 >
                   <ReactMarkdown
                     className="markdown-support"
@@ -229,13 +228,14 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
               </div>
               {isLongDescription && (
                 <a
-                  className="mt-[-18px]"
+                  className="mt-[-18px] flex items-center"
                   onClick={(e) => {
                     e.preventDefault()
                     setDescriptionExpanded(!descriptionExpanded)
                   }}
                 >
-                  <FiChevronDown
+                  <h3 className='text-[14px]  '>{descriptionExpanded ? 'See less' : 'See more'}</h3>
+                  <FiChevronDown 
                     className={`h-5 w-5 text-black transition-transform dark:text-white ${
                       descriptionExpanded ? 'rotate-180' : ''
                     }`}
@@ -245,14 +245,14 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
               )}
             </>
           )}
-          <div className="flex w-full flex-col justify-center gap-4 md:flex-row">
+          <div className="flex absolute right-4 top-4 w-full flex-col justify-end  gap-4 md:flex-row">
             {isSupported && (
               <BidModal
                 collectionId={collection?.id}
                 trigger={
                   <button
                     disabled={isInTheWrongNetwork}
-                    className="btn-primary-outline min-w-[222px] whitespace-nowrap border border-[#D4D4D4] bg-white text-black dark:border-[#525252] dark:bg-black dark:text-white dark:ring-[#525252] dark:focus:ring-4"
+                    className="btn-primary-outline  min-w-[222px] whitespace-nowrap border border-[#D4D4D4] bg-white text-black dark:border-[#525252] dark:bg-black dark:text-white dark:ring-[#525252] dark:focus:ring-4"
                   >
                     {isAttributeModal
                       ? 'Make an Attribute Offer'
@@ -318,7 +318,14 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
                 mutate={tokens.mutate}
               />
             )}
+            
           </div>
+            <div className="flex justify-end mb-[-30px] mt-[-20px]">
+            <HeroSocialLinks
+            collection={collection}
+            refreshCollection={refreshCollection}
+          />
+            </div>
         </div>
       </HeroBackground>
     </>

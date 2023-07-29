@@ -74,7 +74,7 @@ const CollectionsGrid: FC<Props> = ({ collections }) => {
                         alt="Collection Image"
                       />
                     ) : (
-                      <div className="h-12 w-12 flex-none rounded-full bg-gradient-to-br from-primary-500 to-primary-900"></div>
+                      <div className="h-12 w-12 flex-none rounded-full bg-gradient-to-br from-slate-500 to-slate-900"></div>
                     )}
 
                     <div className="reservoir-subtitle dark:text-white">

@@ -28,42 +28,40 @@ const HeroStats: FC<{ stats: Props }> = ({ stats }) => {
   const offerSourceLogo = `${API_BASE}/redirect/sources/${stats.topOfferSource}/logo/v2`
 
   return (
-    <div className="grid min-w-full grid-cols-2 items-center gap-[1px] overflow-hidden rounded-lg border-[1px] border-gray-300 bg-gray-300 dark:border-[#525252] dark:bg-[#525252] md:m-0 md:h-[82px] md:min-w-[647px] md:grid-cols-4 md:gap-2 md:bg-white dark:md:bg-black">
-      <Stat name="items">
-        <h3 className="reservoir-h6 dark:text-white">
+    <div className="flex min-w-full items-center  space-x-8   ">
+      <div className="flex">
+        <h4>items</h4>
+        <h3 className="reservoir-h6  ml-2 dark:text-white">
           {formatNumber(stats.count)}
         </h3>
-      </Stat>
-      <Stat name="top offer">
-        <h3 className="reservoir-h6 flex items-center dark:text-white">
-          {stats.topOfferSource && stats.topOffer && (
-            <img
-              className="mr-1 h-4 w-4"
-              src={offerSourceLogo}
-              alt="Source Logo"
-            />
-          )}
-          <FormatCrypto
-            amount={stats.topOffer}
-            decimals={stats.topOfferCurrency?.decimals}
-            address={stats.topOfferCurrency?.contract}
-          />
-        </h3>
-      </Stat>
-      <Stat name="floor">
-        <h3 className="reservoir-h6 flex items-center justify-center gap-1 dark:text-white">
-          <FormatNativeCrypto amount={stats.floor} maximumFractionDigits={2} />
-          <PercentageChange value={stats.floorChange} />
-        </h3>
-      </Stat>
-      <Stat name="total volume">
+      </div>
+      <div className="flex  ">
+        <h4 >Vol</h4>
         <h3 className="reservoir-h6 flex items-center justify-center gap-1 dark:text-white">
           <FormatNativeCrypto
             amount={stats.allTime}
             maximumFractionDigits={2}
           />
         </h3>
-      </Stat>
+      </div>
+      <div className="flex">
+        <h4 >floor</h4>
+        <h3 className="reservoir-h6 flex items-center justify-center gap-1 dark:text-white">
+          <FormatNativeCrypto amount={stats.floor} maximumFractionDigits={2} />
+          <PercentageChange value={stats.floorChange} />
+        </h3>
+      </div>
+      <div className="flex">
+        <h4>top offer</h4>
+        <h3 className="reservoir-h6 ml-2 flex items-center dark:text-white">
+          {`${stats.topOffer?.toFixed(2)} ETH`}
+          <img
+            src={offerSourceLogo}
+            className="ml-2 h-[18px] w-[20px]"
+            alt="offerSourceLogo"
+          />
+        </h3>
+      </div>
     </div>
   )
 }
@@ -86,7 +84,7 @@ export const PercentageChange: FC<{ value: number | undefined | null }> = ({
   const percentage = (value - 1) * 100
 
   if (percentage > 100 || value === 0) {
-    return null
+    return <div className="text-sm text-[#06C270] ">+0.1%</div>
   }
 
   if (value < 1) {

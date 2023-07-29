@@ -17,7 +17,7 @@ import FormatNativeCrypto from './FormatNativeCrypto'
 import AttributesFlex from './AttributesFlex'
 import ModalCard from './modal/ModalCard'
 import { styled } from '@stitches/react'
-import { violet, blackA } from '@radix-ui/colors'
+import {  blackA, greenA } from '@radix-ui/colors'
 import * as SliderPrimitive from '@radix-ui/react-slider'
 import Link from 'next/link'
 import { Signer } from 'ethers'
@@ -87,9 +87,10 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
   boxShadow: `0 2px 10px ${blackA.blackA7}`,
   borderRadius: 10,
   cursor: 'pointer',
-  '&:hover': { backgroundColor: violet.violet3 },
+  '&:hover': { backgroundColor: greenA.greenA1 },
   '&:focus': { boxShadow: `0 0 0 5px ${blackA.blackA8}` },
 })
+
 
 const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
   const [waitingTx, setWaitingTx] = useState<boolean>(false)

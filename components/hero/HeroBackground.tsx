@@ -23,14 +23,14 @@ const HeroBackground: FC<Props> = ({ banner, children }) => {
         style={{ boxShadow: 'inset 0 0 200px #000000' }}
       >
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute  inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${bannerImage})`,
-            filter: 'blur(5px)',
+            filter: 'blur(1px)',
           }}
         />
       </div>
-      <div className="absolute inset-0 z-0 bg-backdrop dark:bg-dark-backdrop" />
+      <div className="absolute inset-0 z-0  bg-backdrop  dark:bg-dark-backdrop" />
     </div>
   ) : (
     <div className={`${baseClasses} bg-white dark:bg-black`}>{children}</div>
